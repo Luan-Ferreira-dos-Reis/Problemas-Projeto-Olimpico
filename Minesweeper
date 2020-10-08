@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 count = 0
 campo_aux = []
 
@@ -6,7 +8,7 @@ while True :
     s = s.split(" ")
     x = int(s[0])
     y = int(s[1])
-    if(x == 0 or y == 0):
+    if x == 0 or y == 0:
         break
     campo = []
     count+=1
@@ -14,11 +16,16 @@ while True :
         linha = input()
         linha = list(linha)
         campo.append(linha)
-    campo_aux = campo.copy()
+    campo_aux = deepcopy(campo)
     print("Field #", count, ":", sep='')
     for i in range(x):
         for j in range(y):
             print(campo[i][j], sep = "", end = "")
+        print()
+
+    for i in range(x):
+        for j in range(y):
+            print(campo_aux[i][j], sep = "", end = "")
         print()
 
     for i in range(x):
@@ -28,38 +35,36 @@ while True :
 
     for i in range(x):
         for j in range(y):
-            if(i-1 >= 0 and i-1 <= x-1):
-                if(j-1 >= 0 and j-1 <= y-1):
-                    if(campo[i-1][j-1] == '*'):
-                        campo_aux[i][j] += 1
-            if (i-1 >= 0 and i-1 <= x - 1):
-                if (j >= 0 and j <= y - 1):
-                    if (campo[i-1][j] == '*'):
-                        campo_aux[i][j] += 1
-            if (i-1 >= 0 and i-1 <= x - 1):
-                if (j+1 >= 0 and j+1 <= y - 1):
-                    if (campo[i-1][j+1] == '*'):
-                        campo_aux[i][j] += 1
-            if (i+1 >= 0 and i+1 <= x - 1):
-                if (j-1 >= 0 and j-1 <= y - 1):
-                    if (campo[i+1][j-1] == '*'):
-                        campo_aux[i][j] += 1
-            if (i+1 >= 0 and i+1 <= x - 1):
-                if (j >= 0 and j <= y - 1):
-                    if (campo[i+1][j] == '*'):
-                        campo_aux[i][j] += 1
-            if (i+1 >= 0 and i+1 <= x - 1):
-                if (j+1 >= 0 and j+1 <= y - 1):
-                    if (campo[i+1][j+1] == '*'):
-                        campo_aux[i][j] += 1
-            if (i >= 0 and i <= x - 1):
-                if (j-1 >= 0 and j-1 <= y - 1):
-                    if (campo[i][j-1] == '*'):
-                        campo_aux[i][j] += 1
-            if (i >= 0 and i <= x - 1):
-                if (j+1 >= 0 and j+1 <= y - 1):
-                    if (campo[i][j+1] == '*'):
-                        campo_aux[i][j] += 1
+            print(campo_aux[i][j], sep = "", end = "")
+        print()
+
+    for i in range(x):
+        for j in range(y):
+            print(campo[i][j], sep = "", end = "")
+        print()
+
+    for i in range(x):
+        for j in range(y):
+            NO = [i-1, j-1]
+            N = [i-1, j]
+            NE = [i-1, j+1]
+            O = [i, j-1]
+            L = [i, j+1]
+            SO = [i+1, j-1]
+            S = [i+1, j]
+            SL = [i+1, j+1]
+            posicoes = [NO, N, NE, O, L, SO, S, SL]
+            #print(posicoes)
+            for k in range(len(posicoes)):
+                print(posicoes[k])
+                if posicoes[k][0] >= 0 and posicoes[k][0] <= x-1:
+                    if posicoes[k][1] >= 0 and posicoes[k][1] <= y-1:
+                        print("valido")
+                        print(campo[posicoes[k][0]][posicoes[k][1]])
+                        if (campo[posicoes[k][0]][posicoes[k][1]] == "*"):
+                            campo_aux[i][j] += 1
+                            print(campo_aux[i][j])
+
         print()
 
     for i in range(x):
