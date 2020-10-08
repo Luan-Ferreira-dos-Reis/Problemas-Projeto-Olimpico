@@ -1,8 +1,10 @@
 from copy import deepcopy
 
+#inicializa o campo minado e o contador do nº de campos
 count = 0
 campo_aux = []
 
+#ler a o tamanho do campo
 while True :
     s = input()
     s = s.split(" ")
@@ -18,33 +20,16 @@ while True :
         campo.append(linha)
     campo_aux = deepcopy(campo)
     print("Field #", count, ":", sep='')
-    for i in range(x):
-        for j in range(y):
-            print(campo[i][j], sep = "", end = "")
-        print()
 
-    for i in range(x):
-        for j in range(y):
-            print(campo_aux[i][j], sep = "", end = "")
-        print()
-
+#cria um campo com o número de minas ao redor de cada posição
     for i in range(x):
         for j in range(y):
             campo_aux[i][j] = 0
-        print()
 
+#calcula as minas em relação a cada posição do campo
     for i in range(x):
         for j in range(y):
-            print(campo_aux[i][j], sep = "", end = "")
-        print()
-
-    for i in range(x):
-        for j in range(y):
-            print(campo[i][j], sep = "", end = "")
-        print()
-
-    for i in range(x):
-        for j in range(y):
+            #posições relativas para saber se tem uma mina
             NO = [i-1, j-1]
             N = [i-1, j]
             NE = [i-1, j+1]
@@ -54,19 +39,13 @@ while True :
             S = [i+1, j]
             SL = [i+1, j+1]
             posicoes = [NO, N, NE, O, L, SO, S, SL]
-            #print(posicoes)
             for k in range(len(posicoes)):
-                print(posicoes[k])
                 if posicoes[k][0] >= 0 and posicoes[k][0] <= x-1:
                     if posicoes[k][1] >= 0 and posicoes[k][1] <= y-1:
-                        print("valido")
-                        print(campo[posicoes[k][0]][posicoes[k][1]])
                         if (campo[posicoes[k][0]][posicoes[k][1]] == "*"):
                             campo_aux[i][j] += 1
-                            print(campo_aux[i][j])
 
-        print()
-
+    #imprime a saída
     for i in range(x):
         for j in range(y):
             print(campo_aux[i][j], sep = "", end = "")
