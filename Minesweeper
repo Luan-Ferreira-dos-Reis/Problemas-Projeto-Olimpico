@@ -48,6 +48,9 @@ while True :
     #imprime a saída
     for i in range(x):
         for j in range(y):
-            print(campo_aux[i][j], sep = "", end = "")
+            if(campo[i][j] == "*"):
+                print("*", sep="", end="")
+            else:
+                print(campo_aux[i][j], sep = "", end = "")
         print()
 
