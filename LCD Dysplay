@@ -1,0 +1,79 @@
+
+
+def imprime_display(tam, num, linha, coluna):
+    display = [[0, 2, 3, 5, 6, 7, 8, 9],  # a
+               [0, 1, 2, 3, 4, 7, 8, 9],  # b
+               [0,1, 3, 4, 5, 6, 7, 8, 9],  # c
+               [0, 2, 3, 5, 6, 8, 9],  # d
+               [0, 2, 6, 8],  # e
+               [0, 4, 5, 6, 8, 9],  # f
+               [2, 3, 4, 5, 6, 8, 9]]  # g
+    n_linhas = 2*tam + 3
+    n_colunas = tam + 2
+    linha_meio = (n_linhas-1)/2 +1
+    if(linha == 0 and coluna > 0 and coluna < n_colunas - 1):                      #display-a
+        if(num in display[0]):
+            print("-", end="", sep="")
+        else:
+            print(" ", end="", sep="")
+    elif (coluna == n_colunas - 1 and linha > 0 and linha < linha_meio-1  ):         #display-b
+        if (num in display[1]):
+            print("|", end="", sep="")
+        else:
+            print(" ", end="", sep="")
+    elif(coluna == n_colunas - 1 and linha > linha_meio-1 and linha < n_linhas-1 ): #display-c
+        if (num in display[2]):
+            print("|", end="", sep="")
+        else:
+            print(" ", end="", sep="")
+    elif (linha == n_linhas-1 and coluna > 0 and coluna < n_colunas - 1 ):          #display-d
+        if (num in display[3]):
+            print("-", end="", sep="")
+        else:
+            print(" ", end="", sep="")
+    elif (coluna == 0 and linha > linha_meio - 1 and linha < n_linhas - 1 ):        #display-e
+        if (num in display[4]):
+            print("|", end="", sep="")
+        else:
+            print(" ", end="", sep="")
+    elif (coluna == 0 and linha > 0 and linha < linha_meio-1 ):                     #display-f
+        if (num in display[5]):
+            print("|", end="", sep="")
+        else:
+            print(" ", end="", sep="")
+    elif (linha == linha_meio-1 and coluna > 0 and coluna < n_colunas - 1 ):        #display-g
+        if (num in display[6]):
+            print("-", end="", sep="")
+        else:
+            print(" ", end="", sep="")
+    else:                                                                          #resto
+        print(" ", end="", sep="")
+
+
+while True:
+    s = input().split(" ")
+    tam = int(s[0])
+    digs = (s[1])
+    digs = list(digs)
+    if tam == 0:
+        break
+
+    #print(tam)
+    #print(digs)
+    tam_coluna = tam+2
+    tam_linha = 2*tam+3
+    linha_meio = (tam_linha-1)/2+1
+
+
+    for j in range(2*tam+3):
+        for i in range(len(digs)):
+            for k in range(tam + 2):
+                imprime_display(tam,int(digs[i]),j,k)
+            print(" ", end="")
+        print()
+
+
+
+
+
+
